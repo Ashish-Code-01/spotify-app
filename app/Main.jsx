@@ -1,11 +1,8 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import SignedIn from "../components/singInWithOauth"
 
 const Main = () => {
     return (
-        <View>
-            <Text>hello world</Text>
-        </View>
+        <SignedIn />
     )
 }
 
