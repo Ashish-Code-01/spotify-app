@@ -9,7 +9,6 @@ import { createServer } from "http";
 import cron from "node-cron";
 
 import { initializeSocket } from "./lib/socket.js";
-
 import { connectDB } from "./lib/db.js";
 import userRoutes from "./routes/user.route.js";
 import adminRoutes from "./routes/admin.route.js";
@@ -26,6 +25,9 @@ const PORT = process.env.PORT;
 
 const httpServer = createServer(app);
 initializeSocket(httpServer);
+
+// Set keepAliveTimeout to 60 seconds
+httpServer.keepAliveTimeout = 6000; // 60 seconds
 
 app.use(
 	cors({
@@ -57,7 +59,7 @@ cron.schedule("0 * * * *", () => {
 				return;
 			}
 			for (const file of files) {
-				fs.unlink(path.join(tempDir, file), (err) => {});
+				fs.unlink(path.join(tempDir, file), (err) => { });
 			}
 		});
 	}
